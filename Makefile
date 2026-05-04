@@ -6,16 +6,16 @@
 #    By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+          #
 #                                                +#+#+#+#+#+   +#+             #
 #    Created: 2026/04/30 18:18:25 by tireis           #+#    #+#               #
-#    Updated: 2026/05/04 14:19:08 by tireis          ###   ########.fr         #
+#    Updated: 2026/05/04 16:57:19 by tireis          ###   ########.fr         #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        = libftprintf.a
-
+HEADER          = libftprintf.h
 CC          = cc
-CFLAGS      = -Wall -Wextra -Werror -I.
+CFLAGS      = -Wall -Wextra -Werror -MMD -MP
 
-SRC         = ft_printf.c \
+SRCS         = ft_printf.c \
               ft_putchar_pf.c \
               ft_puthex_lower.c \
               ft_puthex_upper.c \
@@ -23,24 +23,28 @@ SRC         = ft_printf.c \
               ft_putptr_pf.c \
               ft_putstr_pf.c \
               ft_putu_pf.c \
-              ft_strlen_pf.c
 
-OBJ         = $(SRC:.c=.o)
+OBJS        = $(SRCS:.c=.o)
+DEPS        = $(SRCS:.c=.d)
+
+AR          = ar rcs
+RM          = rm -f
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	ar rcs $(NAME) $(OBJ)
+$(NAME): $(OBJS)
+	$(AR) $(NAME) $(OBJS) 
 
-%.o: %.c
+%.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	$(RM) $(OBJS) $(DEPS)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 
 .PHONY: all clean fclean re
+-include $(DEPS)
