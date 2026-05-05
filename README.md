@@ -30,7 +30,7 @@ The project is managed using a `Makefile`.
     * `make fclean`: Removes object files and the library.
     * `make re`: Performs a full recompilation.
 
-### Data Structures
+# Data Structures
 *   **va_list:** The `stdarg.h` library is used to handle variable arguments. To ensure the argument list pointer remains consistent across multiple nested function calls (dispatcher vs. sub-functions), a **pointer to the `va_list`** is passed through the functions.
 
 ## Resources
