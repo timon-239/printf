@@ -6,7 +6,7 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 18:32:41 by tireis           #+#    #+#              */
-/*   Updated: 2026/05/04 17:56:36 by tireis          ###   ########.fr        */
+/*   Updated: 2026/05/05 13:58:52 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ int	ft_printf(const char *format, ...)
 	return (total_count);
 }
 
-/*#include <stdio.h> // RETURN IST FALSCH NOCHMAL ANSCHAUEN!>
-	// RETURN IST FALSCH NOCHMAL ANSCHAUEN!!!!!
+/*#include <stdio.h>
 
 int	main(void)
 {
@@ -86,10 +85,8 @@ int	main(void)
 	nb = 100;
 	a = 4;
 	b = &a;
-	x = ft_printf("Hallo %s, %c, %d, %p, %x, %X", "HALLO", 'A', nb, b, 255,
-			166);
-	y = printf("\nHallo %s, %c, %d, %p, %x, %X\n\n", "HALLO", 'A', nb, b, 255,
-			166);
+	x = ft_printf("Hallo %s", "HALLO");
+	y = printf("Hallo %s", "HALLO");
 	printf("\nft = %d, normal = %d\n", x, y);
 	ft_printf("Hallo %s, %c, %d, %p, %x, %X", "HALLO", 'A', nb, b, 255, 166);
 	printf("\nHallo %s, %c, %d, %p, %x, %X\n\n", "HALLO", 'A', nb, b, 255, 166);
