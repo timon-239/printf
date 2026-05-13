@@ -6,7 +6,7 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 18:32:41 by tireis           #+#    #+#              */
-/*   Updated: 2026/05/13 13:14:55 by tireis          ###   ########.fr        */
+/*   Updated: 2026/05/13 13:44:02 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,13 @@ int	main(void)
 	int					nb;
 	int					x;
 	int					y;
+	void				*ptr;
+	int					k;
+	int					counter;
+	int					counter_org;
 
+	k = 0;
+	ptr = &k;
 	nb = 100;
 	a = 4;
 	b = &a;
@@ -102,5 +108,15 @@ int	main(void)
 	printf("\n%x\n", 255);
 	ft_printf("%X", 166);
 	printf("\n%X\n", 166);
+	ptr = 0;
+	printf("\n");
+	counter = ft_printf("%p %p ", ptr, ptr);
+	printf("\n");
+	counter_org = printf("%p %p ", ptr, ptr);
+	printf("\n");
+	printf("%d", counter);
+	printf("\n");
+	printf("%d", counter_org);
+	printf("\n");
 	return (0);
 }*/
