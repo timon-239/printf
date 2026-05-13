@@ -6,11 +6,11 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 20:39:18 by tireis           #+#    #+#              */
-/*   Updated: 2026/04/30 20:42:58 by tireis          ###   ########.fr        */
+/*   Updated: 2026/05/13 13:08:00 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_puthex_upper(unsigned int n)
 {

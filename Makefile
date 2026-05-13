@@ -6,12 +6,12 @@
 #    By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+          #
 #                                                +#+#+#+#+#+   +#+             #
 #    Created: 2026/04/30 18:18:25 by tireis           #+#    #+#               #
-#    Updated: 2026/05/04 16:57:19 by tireis          ###   ########.fr         #
+#    Updated: 2026/05/13 13:13:52 by tireis          ###   ########.fr         #
 #                                                                              #
 # **************************************************************************** #
 
-NAME        = libftprintf.a
-HEADER          = libftprintf.h
+NAME        = ft_printf.a
+HEADER          = ft_printf.h
 CC          = cc
 CFLAGS      = -Wall -Wextra -Werror -MMD -MP
 
