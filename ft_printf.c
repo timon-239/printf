@@ -6,7 +6,7 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 18:32:41 by tireis           #+#    #+#              */
-/*   Updated: 2026/05/13 14:08:29 by tireis          ###   ########.fr        */
+/*   Updated: 2026/05/13 14:31:33 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ int	main(void)
 	int					k;
 	int					counter;
 	int					counter_org;
+	char				*ptr;
 
+	ptr = NULL;
 	nb = 100;
 	a = 4;
 	b = &a;
@@ -108,7 +110,7 @@ int	main(void)
 	printf("\n");
 	counter = ft_printf("%p %p ", ptr, ptr);
 	printf("\n");
-	counter_org = printf("%p %p ", 0, 0);
+	counter_org = printf("(nil) (nil) ");
 	printf("\n");
 	printf("%d", counter);
 	printf("\n");

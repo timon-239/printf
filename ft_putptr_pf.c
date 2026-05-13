@@ -6,7 +6,7 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 20:43:53 by tireis           #+#    #+#              */
-/*   Updated: 2026/05/13 14:09:07 by tireis          ###   ########.fr        */
+/*   Updated: 2026/05/13 14:29:27 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	ft_putptr_pf(unsigned long long ptr)
 	if (!ptr)
 	{
 		ft_putstr_pf("(nil)");
-		count = 5;
 		return (count);
 	}
 	ft_putstr_pf("0x");
