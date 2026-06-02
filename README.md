@@ -18,7 +18,7 @@ The project is managed using a `Makefile`.
 2.  **Usage:**
     Include the header in your C source files:
     ```c
-    #include "libftprintf.h"
+    #include "printf.h"
     ```
     Compile your project by linking the library:
     ```bash
@@ -45,3 +45,25 @@ AI (Gemini/ChatGPT) was used in this project for the following tasks:
 *   **Optimization:** Assistance in choosing recursive approaches for base-conversion functions (Hex/Decimal).
 *   **Documentation:** Drafting and translating the initial structure and content of this README file.
 
+## Detailed Description: Architecture & Design Choices
+
+When designing this implementation of `ft_printf`, the primary goals were **strict standard compliance (42 Norm)**, **maximum memory safety**, and **bulletproof error handling**. 
+
+Instead of writing a single, massive function with endless nested loops, I chose a highly modular and cascaded architecture. Here is why:
+
+### 1. The Twin-Handler Architecture (`handle_formats` & `handle_formats2`)
+The 42 Norm strictly limits functions to a maximum of 25 lines. A full `ft_printf` requires handling at least 9 different format specifiers (`c`, `s`, `p`, `d`, `i`, `u`, `x`, `X`, `%`). 
+
+* **Why this way?** I divided the parsing logic into two layered functions: `handle_formats` handles the basic types, and seamlessly passes unknown specifiers down to `handle_formats2`. 
+* **The Benefit:** This keeps the codebase incredibly clean, highly readable, and 100% Norm-compliant. More importantly, it makes the project **extremely extensible**. Adding a custom live-coding flag (like `%a` or `%H`) literally takes only a single line of code without risking a Norm violation.
+
+### 2. Cascaded Error Protection (The `-1` Chain)
+A common flaw in many `ft_printf` implementations is ignoring the return value of the underlying `write` system call. If a write fails (e.g., closed stdout, broken pipe, or disconnected terminal), a naive printf will keep spinning, incrementing its counter, and return a fake positive length.
+
+* **Why this way?** Every single utility function in this repository (`ft_putchar_pf`, `ft_putstr_pf`, etc.) is fully protected. If `write` returns `-1`, the error is immediately caught and passed back up through the return chain.
+* **The Benefit:** If an error occurs halfway through a complex string like `ft_printf("Hello %s World", "42")`, the execution stops instantly, resources are freed via `va_end`, and `ft_printf` correctly aborts and returns `-1`.
+
+### 3. Optimization over Naive Iteration (`ft_putstr_pf`)
+Instead of printing strings character-by-character inside a `while` loop (which triggers a costly system call for every single byte), my implementation calculates the string length first and executes **one single `write` call** for the entire string. This significantly reduces system overhead and boosts performance.
+
+---
