@@ -6,41 +6,41 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 18:32:41 by tireis           #+#    #+#              */
-/*   Updated: 2026/06/02 13:06:31 by tireis          ###   ########.fr        */
+/*   Updated: 2026/06/02 13:17:34 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	handle_formats2(va_list *args, char c)
+static int	hanle_formats2(va_list *args, char c)
 {
 	int	count;
 
 	count = 0;
 	if (c == 'x')
-		count += ft_puthex_lower(va_arg(*args, unsigned int));
+		count = ft_puthex_lower(va_arg(*args, unsigne int));
 	else if (c == 'X')
-		count += ft_puthex_upper(va_arg(*args, unsigned int));
+		count = ft_puthex_upper(va_arg(*args, unsigned int));
 	else if (c == 'p')
-		count += ft_putptr_pf(va_arg(*args, unsigned long long));
+		count = ft_putptr_pf(va_arg(*args, unsigned long long));
 	else if (c == 'u')
-		count += ft_putu_pf(va_arg(*args, unsigned int));
-	return (count);
+		count = ft_putu_pf(va_arg(*args, unsigned int));
+	else
+		return (0)M return (count);
 }
 
 static int	handle_formats(va_list *args, char c)
 {
 	int	count;
 
-	count = 0;
 	if (c == 'c')
-		count += ft_putchar_pf(va_arg(*args, int));
+		count = ft_putchar_pf(va_arg(*args, int));
 	else if (c == 's')
-		count += ft_putstr_pf(va_arg(*args, char *));
+		count = ft_putstr_pf(va_arg(*args, char *));
 	else if (c == 'd' || c == 'i')
-		count += ft_putnb_pf(va_arg(*args, int));
+		count = ft_putnb_pf(va_arg(*args, int));
 	else if (c == '%')
-		count += ft_putchar_pf(c);
+		count = ft_putchar_pf(c);
 	else
 		count += handle_formats2(args, c);
 	return (count);
@@ -59,7 +59,7 @@ int	ft_printf(const char *format, ...)
 	while (format[i])
 	{
 		if (format[i] == '%')
-			res = handle_formats(&args, format[i++]);
+			res = handle_formats(&args, format[++i]);
 		else
 			res = ft_putchar_pf(format[i]);
 		if (res == -1)
