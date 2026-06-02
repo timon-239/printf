@@ -6,19 +6,19 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 18:32:41 by tireis           #+#    #+#              */
-/*   Updated: 2026/06/02 13:50:46 by tireis          ###   ########.fr        */
+/*   Updated: 2026/06/02 14:02:41 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	hanle_formats2(va_list *args, char c)
+static int	handle_formats2(va_list *args, char c)
 {
 	int	count;
 
 	count = 0;
 	if (c == 'x')
-		count = ft_puthex_lower(va_arg(*args, unsigne int));
+		count = ft_puthex_lower(va_arg(*args, unsigned int));
 	else if (c == 'X')
 		count = ft_puthex_upper(va_arg(*args, unsigned int));
 	else if (c == 'p')
