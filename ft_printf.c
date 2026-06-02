@@ -6,7 +6,7 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 18:32:41 by tireis           #+#    #+#              */
-/*   Updated: 2026/06/02 12:33:23 by tireis          ###   ########.fr        */
+/*   Updated: 2026/06/02 13:06:31 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	ft_printf(const char *format, ...)
 	va_list	args;
 	int		total_count;
 	size_t	i;
+	int		res;
 
 	i = 0;
 	total_count = 0;
@@ -58,17 +59,19 @@ int	ft_printf(const char *format, ...)
 	while (format[i])
 	{
 		if (format[i] == '%')
-		{
-			i++;
-			total_count += handle_formats(&args, format[i]);
-		}
+			res = handle_formats(&args, format[i++]);
 		else
+			res = ft_putchar_pf(format[i]);
+		if (res == -1)
 		{
-			ft_putchar_pf(format[i]);
-			total_count++;
+			va_end(args);
+			return (-1);
 		}
-		i++;
+		total_count += res;
+		if (format[i])
+			i++;
 	}
+	va_end(args);
 	return (total_count);
 }
 
