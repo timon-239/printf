@@ -6,7 +6,7 @@
 #    By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+          #
 #                                                +#+#+#+#+#+   +#+             #
 #    Created: 2026/04/30 18:18:25 by tireis           #+#    #+#               #
-#    Updated: 2026/05/13 13:17:35 by tireis          ###   ########.fr         #
+#    Updated: 2026/06/02 14:15:14 by tireis          ###   ########.fr         #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS         = ft_printf.c \
               ft_putnb_pf.c \
               ft_putptr_pf.c \
               ft_putstr_pf.c \
-              ft_putu_pf.c \
+              ft_putu_pf.c
 
 OBJS        = $(SRCS:.c=.o)
 DEPS        = $(SRCS:.c=.d)
@@ -35,7 +35,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS) 
 
-%.o: %.c $(HEADER)
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
