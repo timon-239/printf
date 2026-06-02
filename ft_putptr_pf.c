@@ -6,7 +6,7 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 20:43:53 by tireis           #+#    #+#              */
-/*   Updated: 2026/05/29 14:07:03 by tireis          ###   ########.fr        */
+/*   Updated: 2026/06/02 12:46:35 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,39 @@
 static int	ft_hexhelp(unsigned long long n)
 {
 	int		count;
+	int		res;
 	char	*base;
 
 	base = "0123456789abcdef";
 	count = 0;
 	if (n >= 16)
-		count += ft_hexhelp(n / 16);
-	count += ft_putchar_pf(base[n % 16]);
-	return (count);
+	{
+		res = ft_hexhelp(n / 16);
+		if (res == -1)
+			return (-1);
+		count += res;
+	}
+	res = ft_putchar_pf(base[n % 16]);
+	if (res == -1)
+		return (-1);
+	return (count + res);
 }
 
 int	ft_putptr_pf(unsigned long long ptr)
 {
 	int	count;
+	int	res;
 
-	count = 0;
 	if (ptr == 0)
-	{
-		count = ft_putstr_pf("(nil)");
-		return (count);
-	}
-	ft_putstr_pf("0x");
-	count = 2;
-	count += ft_hexhelp(ptr);
-	return (count);
+		return (ft_putstr_pf("(nil)"));
+	res = ft_putstr_pf("0x");
+	if (res == -1)
+		return (-1);
+	count = res;
+	res = ft_hexhelp(ptr);
+	if (res == -1)
+		return (-1);
+	return (count + res);
 }
 
 /*#include <stdio.h>
