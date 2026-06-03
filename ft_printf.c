@@ -6,7 +6,7 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 18:32:41 by tireis           #+#    #+#              */
-/*   Updated: 2026/06/03 19:08:33 by tireis          ###   ########.fr        */
+/*   Updated: 2026/06/03 19:29:28 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static int	handle_formats(va_list *args, char c)
 {
 	int	count;
 
+	count = 0;
 	if (c == 'c')
 		count = ft_putchar_pf(va_arg(*args, int));
 	else if (c == 's')
@@ -105,7 +106,258 @@ int	ft_printf(const char *format, ...)
 	return (va_end(args), total_count);
 }
 /*
+#include "ft_printf.h"
+#include <limits.h>
 #include <stdio.h>
+
+int	main(void)
+{
+	int	a;
+	int	b;
+	int	res_ft;
+	int	res_org;
+
+	a = 42;
+	b = 99;
+	res_ft = ft_printf("%c", 'a');
+	printf("\n");
+	res_org = printf("%c", 'a');
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%c", 'Z');
+	printf("\n");
+	res_org = printf("%c", 'Z');
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%c", 65);
+	printf("\n");
+	res_org = printf("%c", 65);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%c", 0);
+	printf("\n");
+	res_org = printf("%c", 0);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("test%ctest", 'X');
+	printf("\n");
+	res_org = printf("test%ctest", 'X');
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%c%c%c", 'a', 'b', 'c');
+	printf("\n");
+	res_org = printf("%c%c%c", 'a', 'b', 'c');
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%s", "hello");
+	printf("\n");
+	res_org = printf("%s", "hello");
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%s", "");
+	printf("\n");
+	res_org = printf("%s", "");
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%s", NULL);
+	printf("\n");
+	res_org = printf("%s", NULL);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%s %s", "foo", "bar");
+	printf("\n");
+	res_org = printf("%s %s", "foo", "bar");
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%s", "Hello, World!");
+	printf("\n");
+	res_org = printf("%s", "Hello, World!");
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%d", 0);
+	printf("\n");
+	res_org = printf("%d", 0);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%d", 42);
+	printf("\n");
+	res_org = printf("%d", 42);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%d", -42);
+	printf("\n");
+	res_org = printf("%d", -42);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%d", INT_MAX);
+	printf("\n");
+	res_org = printf("%d", INT_MAX);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%d", INT_MIN);
+	printf("\n");
+	res_org = printf("%d", INT_MIN);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%d", -1);
+	printf("\n");
+	res_org = printf("%d", -1);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%i", 42);
+	printf("\n");
+	res_org = printf("%i", 42);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%i", -42);
+	printf("\n");
+	res_org = printf("%i", -42);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%i", 0);
+	printf("\n");
+	res_org = printf("%i", 0);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%i", INT_MIN);
+	printf("\n");
+	res_org = printf("%i", INT_MIN);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%u", 0);
+	printf("\n");
+	res_org = printf("%u", 0);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%u", 42);
+	printf("\n");
+	res_org = printf("%u", 42);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%u", 4294967295U);
+	printf("\n");
+	res_org = printf("%u", 4294967295U);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%u", 2147483648U);
+	printf("\n");
+	res_org = printf("%u", 2147483648U);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%x", 0);
+	printf("\n");
+	res_org = printf("%x", 0);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%x", 255);
+	printf("\n");
+	res_org = printf("%x", 255);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%x", 16);
+	printf("\n");
+	res_org = printf("%x", 16);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%x", 4294967295U);
+	printf("\n");
+	res_org = printf("%x", 4294967295U);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%x", 15);
+	printf("\n");
+	res_org = printf("%x", 15);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%X", 0);
+	printf("\n");
+	res_org = printf("%X", 0);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%X", 255);
+	printf("\n");
+	res_org = printf("%X", 255);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%X", 4294967295U);
+	printf("\n");
+	res_org = printf("%X", 4294967295U);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%X", 15);
+	printf("\n");
+	res_org = printf("%X", 15);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%p", &a);
+	printf("\n");
+	res_org = printf("%p", &a);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%p", NULL);
+	printf("\n");
+	res_org = printf("%p", NULL);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%p %p", &a, &b);
+	printf("\n");
+	res_org = printf("%p %p", &a, &b);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%%");
+	printf("\n");
+	res_org = printf("%%");
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("100%%");
+	printf("\n");
+	res_org = printf("100%%");
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%%%d%%", 42);
+	printf("\n");
+	res_org = printf("%%%d%%", 42);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("hello world");
+	printf("\n");
+	res_org = printf("hello world");
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%c %s %d", 'A', "hi", 42);
+	printf("\n");
+	res_org = printf("%c %s %d", 'A', "hi", 42);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%d + %d = %d", 1, 2, 3);
+	printf("\n");
+	res_org = printf("%d + %d = %d", 1, 2, 3);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%s: %d (0x%x)", "val", 255, 255);
+	printf("\n");
+	res_org = printf("%s: %d (0x%x)", "val", 255, 255);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("%d %i %u %x %X", 42, 42, 42, 42, 42);
+	printf("\n");
+	res_org = printf("%d %i %u %x %X", 42, 42, 42, 42, 42);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("min=%d max=%d", INT_MIN, INT_MAX);
+	printf("\n");
+	res_org = printf("min=%d max=%d", INT_MIN, INT_MAX);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	res_ft = ft_printf("neg: %d hex: %x", -1, 255);
+	printf("\n");
+	res_org = printf("neg: %d hex: %x", -1, 255);
+	printf("\n");
+	printf("ft=%d org=%d\n\n", res_ft, res_org);
+	return (0);
+}
+
+
 
 int	main(void)
 {
