@@ -6,7 +6,7 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 18:32:41 by tireis           #+#    #+#              */
-/*   Updated: 2026/06/03 19:29:28 by tireis          ###   ########.fr        */
+/*   Updated: 2026/06/03 19:44:54 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static int	check_format_error(const char *format)
 
 static int	handle_formats2(va_list *args, char c)
 {
-	int	count;
+	int		count;
+	void	*ptr;
 
 	count = 0;
 	if (c == 'x')
@@ -51,7 +52,10 @@ static int	handle_formats2(va_list *args, char c)
 	else if (c == 'X')
 		count = ft_puthex_upper(va_arg(*args, unsigned int));
 	else if (c == 'p')
-		count = ft_putptr_pf(va_arg(*args, unsigned long long));
+	{
+		ptr = va_arg(*args, void *);
+		count = ft_putptr_pf((unsigned long long)ptr);
+	}
 	else if (c == 'u')
 		count = ft_putu_pf(va_arg(*args, unsigned int));
 	else
