@@ -6,11 +6,34 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 18:32:41 by tireis           #+#    #+#              */
-/*   Updated: 2026/06/03 15:41:36 by tireis          ###   ########.fr        */
+/*   Updated: 2026/06/03 18:52:34 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static int	check_format_error(const char *format)
+{
+	size_t	i;
+
+	i = 0;
+	if (!format)
+		return (1);
+	while (format[i])
+	{
+		if (format[i] == '%')
+		{
+			if (format[i + 1] == '\0')
+				return (1);
+			i += 2;
+		}
+		else
+		{
+			i++;
+		}
+	}
+	return (0);
+}
 
 static int	handle_formats2(va_list *args, char c)
 {
@@ -54,6 +77,8 @@ int	ft_printf(const char *format, ...)
 	size_t	i;
 	int		res;
 
+	if (check_format_error(format))
+		return (-1);
 	i = 0;
 	total_count = 0;
 	va_start(args, format);
@@ -64,19 +89,27 @@ int	ft_printf(const char *format, ...)
 		else
 			res = ft_putchar_pf(format[i]);
 		if (res == -1)
-		{
-			va_end(args);
-			return (-1);
-		}
+			return (va_end(args), -1);
 		total_count += res;
-		if (format[i])
-			i++;
+		i++;
 	}
 	va_end(args);
 	return (total_count);
 }
+/*
+#include <stdio.h>
 
-/*#include <stdio.h>
+int	main(void)
+{
+	int	org;
+	int	mein;
+
+	mein = ft_printf("abcd%");
+	printf("\n");
+	org = printf("abcd%");
+	printf("\n");
+	printf("MEINS : %d , ORG : %d", mein, org);
+}
 
 int	main(void)
 {
