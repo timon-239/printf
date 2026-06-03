@@ -6,7 +6,7 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 18:32:41 by tireis           #+#    #+#              */
-/*   Updated: 2026/06/03 18:52:34 by tireis          ###   ########.fr        */
+/*   Updated: 2026/06/03 19:08:33 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 static int	check_format_error(const char *format)
 {
 	size_t	i;
+	char	*valid;
+	size_t	j;
 
 	i = 0;
+	valid = "cspdiuxX%";
 	if (!format)
 		return (1);
 	while (format[i])
@@ -25,12 +28,15 @@ static int	check_format_error(const char *format)
 		{
 			if (format[i + 1] == '\0')
 				return (1);
+			j = 0;
+			while (valid[j] && valid[j] != format[i + 1])
+				j++;
+			if (valid[j] == '\0')
+				return (1);
 			i += 2;
 		}
 		else
-		{
 			i++;
-		}
 	}
 	return (0);
 }
@@ -85,7 +91,10 @@ int	ft_printf(const char *format, ...)
 	while (format[i])
 	{
 		if (format[i] == '%')
-			res = handle_formats(&args, format[++i]);
+		{
+			res = handle_formats(&args, format[i + 1]);
+			i++;
+		}
 		else
 			res = ft_putchar_pf(format[i]);
 		if (res == -1)
@@ -93,8 +102,7 @@ int	ft_printf(const char *format, ...)
 		total_count += res;
 		i++;
 	}
-	va_end(args);
-	return (total_count);
+	return (va_end(args), total_count);
 }
 /*
 #include <stdio.h>
@@ -110,6 +118,8 @@ int	main(void)
 	printf("\n");
 	printf("MEINS : %d , ORG : %d", mein, org);
 }
+
+#include <stdio.h>
 
 int	main(void)
 {
@@ -130,6 +140,10 @@ int	main(void)
 	x = ft_printf("Hallo %s", "HALLO");
 	y = printf("Hallo %s", "HALLO");
 	printf("\nft = %d, normal = %d\n", x, y);
+	printf("\n");
+	ft_printf("HIER TEST:");
+	ft_printf("Test %z");
+	printf("\n");
 	ft_printf("Hallo %s, %c, %d, %p, %x, %X", "HALLO", 'A', nb, b, 255, 166);
 	printf("\nHallo %s, %c, %d, %p, %x, %X\n\n", "HALLO", 'A', nb, b, 255, 166);
 	ft_printf("%c", 'A');
