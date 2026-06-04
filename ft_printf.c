@@ -6,7 +6,7 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 18:32:41 by tireis           #+#    #+#              */
-/*   Updated: 2026/06/04 16:57:19 by tireis          ###   ########.fr        */
+/*   Updated: 2026/06/04 19:39:53 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			if (format[i + 1] == '\0')
-				return (-1);
+				return (va_end(args), -1);
 			res = handle_formats(&args, format[i + 1]);
 			i++;
 		}
@@ -335,7 +335,7 @@ int	main(void)
 	return (0);
 }
 
-
+*/
 #include <stdio.h>
 
 int	main(void)
@@ -349,15 +349,15 @@ int	main(void)
 	printf("\n");
 	org = printf("abc%");
 	printf("\n");
-	org2 = printf("ab%yasdasdasd");
+	org2 = printf("hallo %y hallo");
 	printf("\n");
-	mein2 = ft_printf("ab%yasdasdasd");
+	mein2 = ft_printf("hallo %y hallo");
 	printf("\n");
 	printf("MEINS : %d , ORG : %dn mein2 : %d , org2 %d", mein, org, mein2,
 		org2);
 }
 
-#include <stdio.h>
+/*#include <stdio.h>
 
 int	main(void)
 {

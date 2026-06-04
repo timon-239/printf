@@ -67,6 +67,6 @@ A common flaw in many `ft_printf` implementations is ignoring the return value o
 Instead of printing strings character-by-character inside a `while` loop (which triggers a costly system call for every single byte), my implementation calculates the string length first and executes **one single `write` call** for the entire string. This significantly reduces system overhead and boosts performance.
 
 ### 4. Undefined Behaviour
-Incase of undefined Behaviour my printf at ("abc%") behaves like the original `printf` with the return -1 and printing abc, also for ("ab%y").
+For undefined behaviour, such as ft_printf("abc%"), my implementation behaves like the original printf on linux systems and returns -1. For unsupported format specifiers otherthan c, s, p, d, i, u, x, X, and %, the behaviour is undefined. In these cases, I chose to print the % and the following character as regular characters. Since the purpose of printf is to print the provided text, I consider it more intuitive to preserve the original input instead of ignoring it or producing an error. If an unsupported specifier appears, it is likely because the user intentionally wrote it, and printing it makes the output remain as close as possible to the original format string.
 
----
+-----
