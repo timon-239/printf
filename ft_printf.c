@@ -6,7 +6,7 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 18:32:41 by tireis           #+#    #+#              */
-/*   Updated: 2026/06/04 15:41:18 by tireis          ###   ########.fr        */
+/*   Updated: 2026/06/04 16:57:19 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ static int	handle_formats2(va_list *args, char c)
 	else if (c == 'u')
 		count = ft_putu_pf(va_arg(*args, unsigned int));
 	else
-		return (-1);
+	{
+		count += ft_putchar_pf('%');
+		count += ft_putchar_pf(c);
+	}
 	return (count);
 }
 
@@ -66,6 +69,8 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
+			if (format[i + 1] == '\0')
+				return (-1);
 			res = handle_formats(&args, format[i + 1]);
 			i++;
 		}
@@ -344,9 +349,9 @@ int	main(void)
 	printf("\n");
 	org = printf("abc%");
 	printf("\n");
-	org2 = printf("ab%z");
+	org2 = printf("ab%yasdasdasd");
 	printf("\n");
-	mein2 = ft_printf("ab%z");
+	mein2 = ft_printf("ab%yasdasdasd");
 	printf("\n");
 	printf("MEINS : %d , ORG : %dn mein2 : %d , org2 %d", mein, org, mein2,
 		org2);
