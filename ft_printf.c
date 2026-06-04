@@ -6,40 +6,11 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 18:32:41 by tireis           #+#    #+#              */
-/*   Updated: 2026/06/03 19:44:54 by tireis          ###   ########.fr        */
+/*   Updated: 2026/06/04 14:53:29 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static int	check_format_error(const char *format)
-{
-	size_t	i;
-	char	*valid;
-	size_t	j;
-
-	i = 0;
-	valid = "cspdiuxX%";
-	if (!format)
-		return (1);
-	while (format[i])
-	{
-		if (format[i] == '%')
-		{
-			if (format[i + 1] == '\0')
-				return (1);
-			j = 0;
-			while (valid[j] && valid[j] != format[i + 1])
-				j++;
-			if (valid[j] == '\0')
-				return (1);
-			i += 2;
-		}
-		else
-			i++;
-	}
-	return (0);
-}
 
 static int	handle_formats2(va_list *args, char c)
 {
@@ -59,7 +30,7 @@ static int	handle_formats2(va_list *args, char c)
 	else if (c == 'u')
 		count = ft_putu_pf(va_arg(*args, unsigned int));
 	else
-		return (-1);
+		ft_putchar_pf(c);
 	return (count);
 }
 
@@ -88,8 +59,6 @@ int	ft_printf(const char *format, ...)
 	size_t	i;
 	int		res;
 
-	if (check_format_error(format))
-		return (-1);
 	i = 0;
 	total_count = 0;
 	va_start(args, format);
@@ -363,14 +332,16 @@ int	main(void)
 
 
 
+#include <stdio.h>
+
 int	main(void)
 {
 	int	org;
 	int	mein;
 
-	mein = ft_printf("abcd%");
+	mein = ft_printf("hallo %z hallo");
 	printf("\n");
-	org = printf("abcd%");
+	org = printf("hallo %z hallo");
 	printf("\n");
 	printf("MEINS : %d , ORG : %d", mein, org);
 }
