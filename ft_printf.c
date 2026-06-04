@@ -6,7 +6,7 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 18:32:41 by tireis           #+#    #+#              */
-/*   Updated: 2026/06/04 19:51:31 by tireis          ###   ########.fr        */
+/*   Updated: 2026/06/04 20:09:16 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ static int	handle_formats2(va_list *args, char c)
 	else if (c == 'u')
 		count = ft_putu_pf(va_arg(*args, unsigned int));
 	else
-	{
-		count += ft_putchar_pf('%');
-		count += ft_putchar_pf(c);
-	}
+		count = ft_putchar_pf(c);
 	return (count);
 }
 
@@ -335,7 +332,6 @@ int	main(void)
 	return (0);
 }
 
-*/
 #include <stdio.h>
 
 int	main(void)
@@ -345,6 +341,7 @@ int	main(void)
 	int	org2;
 	int	mein2;
 
+	printf("Meine\n");
 	mein = ft_printf("abc%");
 	printf("\n");
 	org = printf("abc%");
@@ -357,7 +354,7 @@ int	main(void)
 		org2);
 }
 
-/*#include <stdio.h>
+#include <stdio.h>
 
 int	main(void)
 {
