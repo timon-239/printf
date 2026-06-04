@@ -6,7 +6,7 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 18:32:41 by tireis           #+#    #+#              */
-/*   Updated: 2026/06/04 20:09:16 by tireis          ###   ########.fr        */
+/*   Updated: 2026/06/04 21:20:12 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -353,7 +353,6 @@ int	main(void)
 	printf("MEINS : %d , ORG : %dn mein2 : %d , org2 %d", mein, org, mein2,
 		org2);
 }
-
 #include <stdio.h>
 
 int	main(void)
