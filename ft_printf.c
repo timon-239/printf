@@ -6,7 +6,7 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 18:32:41 by tireis           #+#    #+#              */
-/*   Updated: 2026/06/04 15:02:05 by tireis          ###   ########.fr        */
+/*   Updated: 2026/06/04 15:18:37 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,19 +331,25 @@ int	main(void)
 }
 
 
-
 #include <stdio.h>
 
 int	main(void)
 {
 	int	org;
 	int	mein;
+	int	org2;
+	int	mein2;
 
-	mein = ft_printf("hallo %z hallo");
+	mein = ft_printf("abc%");
 	printf("\n");
-	org = printf("hallo %z hallo");
+	org = printf("abc%");
 	printf("\n");
-	printf("MEINS : %d , ORG : %d", mein, org);
+	org2 = printf("ab%z");
+	printf("\n");
+	mein2 = ft_printf("ab%z");
+	printf("\n");
+	printf("MEINS : %d , ORG : %dn mein2 : %d , org2 %d", mein, org, mein2,
+		org2);
 }
 
 #include <stdio.h>

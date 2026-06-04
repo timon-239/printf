@@ -66,4 +66,7 @@ A common flaw in many `ft_printf` implementations is ignoring the return value o
 ### 3. Optimization over Naive Iteration (`ft_putstr_pf`)
 Instead of printing strings character-by-character inside a `while` loop (which triggers a costly system call for every single byte), my implementation calculates the string length first and executes **one single `write` call** for the entire string. This significantly reduces system overhead and boosts performance.
 
+### Unedfined Behaviour
+Incase of undefined Behaviour my printf at ("abc%") behaves like the original `printf` with the return -1 and printing abc, also for ("ab%z").
+
 ---
