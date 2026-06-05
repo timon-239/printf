@@ -6,7 +6,7 @@
 /*   By: tireis <tireis@student.42vienna.com>      #+#  +:+       +#+         */
 /*                                               +#+#+#+#+#+   +#+            */
 /*   Created: 2026/04/30 18:32:41 by tireis           #+#    #+#              */
-/*   Updated: 2026/06/04 21:20:12 by tireis          ###   ########.fr        */
+/*   Updated: 2026/06/05 12:37:52 by tireis          ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ static int	handle_formats2(va_list *args, char c)
 	else if (c == 'u')
 		count = ft_putu_pf(va_arg(*args, unsigned int));
 	else
-		count = ft_putchar_pf(c);
+	{
+		count += ft_putchar_pf('%');
+		count += ft_putchar_pf(c);
+		return (count);
+	}
 	return (count);
 }
 
